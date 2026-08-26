@@ -1,0 +1,66 @@
+// Literal Tailwind class strings so the JIT scanner picks them up even
+// though they're selected dynamically at runtime (via array index / cycling).
+export const palette = [
+  {
+    key: 'blue',
+    text: 'text-blue-600 dark:text-blue-300',
+    chipBorder: 'hover:border-blue-400/40',
+    iconBg: 'from-blue-500/25 to-blue-400/5',
+    cardTint: 'from-blue-500/14 via-blue-400/5 to-transparent',
+    tagText: 'text-blue-600 dark:text-blue-300/90',
+    dot: 'bg-blue-600 dark:bg-blue-400',
+    shadow: 'rgba(79,157,255,0.5)',
+  },
+  {
+    key: 'purple',
+    text: 'text-purple-600 dark:text-purple-300',
+    chipBorder: 'hover:border-purple-400/40',
+    iconBg: 'from-purple-500/25 to-purple-400/5',
+    cardTint: 'from-purple-500/14 via-purple-400/5 to-transparent',
+    tagText: 'text-purple-600 dark:text-purple-300/90',
+    dot: 'bg-purple-600 dark:bg-purple-400',
+    shadow: 'rgba(167,107,255,0.5)',
+  },
+  {
+    key: 'cyan',
+    text: 'text-cyan-600 dark:text-cyan-300',
+    chipBorder: 'hover:border-cyan-400/40',
+    iconBg: 'from-cyan-500/25 to-cyan-400/5',
+    cardTint: 'from-cyan-500/14 via-cyan-400/5 to-transparent',
+    tagText: 'text-cyan-600 dark:text-cyan-300/90',
+    dot: 'bg-cyan-600 dark:bg-cyan-400',
+    shadow: 'rgba(53,231,209,0.5)',
+  },
+  {
+    key: 'pink',
+    text: 'text-pink-600 dark:text-pink-300',
+    chipBorder: 'hover:border-pink-400/40',
+    iconBg: 'from-pink-500/25 to-pink-400/5',
+    cardTint: 'from-pink-500/14 via-pink-400/5 to-transparent',
+    tagText: 'text-pink-600 dark:text-pink-300/90',
+    dot: 'bg-pink-600 dark:bg-pink-400',
+    shadow: 'rgba(244,114,182,0.5)',
+  },
+  {
+    key: 'amber',
+    text: 'text-amber-600 dark:text-amber-300',
+    chipBorder: 'hover:border-amber-400/40',
+    iconBg: 'from-amber-500/25 to-amber-400/5',
+    cardTint: 'from-amber-500/14 via-amber-400/5 to-transparent',
+    tagText: 'text-amber-600 dark:text-amber-300/90',
+    dot: 'bg-amber-600 dark:bg-amber-400',
+    shadow: 'rgba(251,191,36,0.5)',
+  },
+  {
+    key: 'emerald',
+    text: 'text-emerald-600 dark:text-emerald-300',
+    chipBorder: 'hover:border-emerald-400/40',
+    iconBg: 'from-emerald-500/25 to-emerald-400/5',
+    cardTint: 'from-emerald-500/14 via-emerald-400/5 to-transparent',
+    tagText: 'text-emerald-600 dark:text-emerald-300/90',
+    dot: 'bg-emerald-600 dark:bg-emerald-400',
+    shadow: 'rgba(52,211,153,0.5)',
+  },
+]
+
+export const accentAt = (i) => palette[i % palette.length]

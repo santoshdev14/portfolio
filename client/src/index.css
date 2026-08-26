@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-bg: #05070d;
+  --color-bg-alt: #0a0e1a;
+  --color-surface: #0d1220;
+  --color-border: rgba(148, 163, 200, 0.12);
+  --color-text: #e7ecf7;
+  --color-text-dim: #8892b0;
+  --color-blue: #4f9dff;
+  --color-purple: #a76bff;
+  --color-cyan: #35e7d1;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+[data-theme="light"] {
+  --color-bg: #f6f7fb;
+  --color-bg-alt: #ececf5;
+  --color-surface: #ffffff;
+  --color-border: rgba(30, 41, 82, 0.1);
+  --color-text: #10132b;
+  --color-text-dim: #565f82;
+}
+
+body,
+.glass {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+}
+
+[data-theme="light"] .glass {
+  background: linear-gradient(180deg, rgba(20, 30, 70, 0.035), rgba(20, 30, 70, 0.015));
+  border: 1px solid var(--color-border);
+}
+
+[data-theme="light"] .bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(30, 41, 82, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 82, 0.06) 1px, transparent 1px);
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(79, 157, 255, 0.25);
+  color: #10132b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html, body, #root {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(79, 157, 255, 0.35);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-blue), var(--color-purple));
+  border-radius: 999px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Background grid + glow */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 200, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 200, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glow-blue {
+  box-shadow: 0 0 40px -12px rgba(79, 157, 255, 0.45);
+}
+.glow-purple {
+  box-shadow: 0 0 40px -12px rgba(167, 107, 255, 0.45);
+}
+.glow-cyan {
+  box-shadow: 0 0 40px -12px rgba(53, 231, 209, 0.45);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #a9c7ff 0%, #c9b8ff 45%, #7dece0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-theme="light"] .text-gradient {
+  background: linear-gradient(100deg, #2563eb 0%, #7c3aed 45%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 1rem;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(79, 157, 255, 0.5), rgba(167, 107, 255, 0.2), rgba(53, 231, 209, 0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--color-cyan);
+}
