@@ -16,6 +16,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
   'http://localhost:3000',
+  'https://portfolio-c5hh.onrender.com',
 
   // Your Vercel frontend
   process.env.FRONTEND_URL,
