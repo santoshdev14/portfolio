@@ -192,7 +192,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex flex-row lg:flex-col gap-4 flex-wrap"
+            className="flex flex-col gap-4 w-full"
           >
             {[
               { icon: Mail, label: 'Email Me directly', desc: 'santoshvarma01814@gmail.com', href: 'mailto:santoshvarma01814@gmail.com' },
@@ -205,7 +205,7 @@ export default function Contact() {
                 href={href}
                 target="_blank"
                 rel="noreferrer"
-                className="glass rounded-2xl p-5 flex items-start gap-4 hover:border-cyan-400/50 hover:bg-cyan-500/5 transition-all duration-300 flex-1 lg:flex-none group shadow-sm hover:shadow-md"
+                className="glass rounded-2xl p-5 flex items-start gap-4 hover:border-cyan-400/50 hover:bg-cyan-500/5 transition-all duration-300 w-full group shadow-sm hover:shadow-md"
               >
                 <div className="p-2.5 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all">
                   <Icon size={20} />

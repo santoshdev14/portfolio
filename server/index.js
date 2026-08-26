@@ -3,8 +3,12 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
 const app = express();
+
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 const PORT = process.env.PORT || 5001;
 
@@ -222,7 +226,42 @@ ${message}
   };
 
   // --------------------------------------------------
-  // SMTP Check
+  // Send Email
+  // --------------------------------------------------
+
+  if (resend) {
+    try {
+      const response = await resend.emails.send({
+        from: process.env.RESEND_FROM || 'onboarding@resend.dev',
+        to: process.env.RECEIVER_EMAIL || 'hello@santoshvarma.dev',
+        replyTo: email,
+        subject: `New Project Inquiry: ${projectType} from ${name}`,
+        text: mailOptions.text,
+        html: mailOptions.html,
+      });
+
+      if (response.error) {
+        console.error('[Error] Resend API failed to send email:', response.error);
+        return res.status(500).json({
+          error: 'Failed to deliver message. Please try again later.',
+        });
+      }
+
+      console.log(`[Success] Email sent via Resend API to ${mailOptions.to}`);
+      return res.status(200).json({
+        success: true,
+        message: 'Message sent successfully.',
+      });
+    } catch (error) {
+      console.error('[Error] Resend API exception:', error);
+      return res.status(500).json({
+        error: 'Failed to deliver message. Please try again later.',
+      });
+    }
+  }
+
+  // --------------------------------------------------
+  // Fallback: SMTP Check
   // --------------------------------------------------
 
   const hasUser =
@@ -255,7 +294,7 @@ ${message}
   }
 
   // --------------------------------------------------
-  // Nodemailer
+  // Fallback: Nodemailer SMTP
   // --------------------------------------------------
 
   const smtpPort = parseInt(
@@ -282,7 +321,7 @@ ${message}
     await transporter.sendMail(mailOptions);
 
     console.log(
-      `[Success] Email sent to ${mailOptions.to}`
+      `[Success] Email sent via SMTP to ${mailOptions.to}`
     );
 
     return res.status(200).json({
@@ -293,7 +332,7 @@ ${message}
   } catch (error) {
 
     console.error(
-      '[Error] Failed to send email:',
+      '[Error] Failed to send email via SMTP:',
       error
     );
 
@@ -318,29 +357,23 @@ app.listen(PORT, '0.0.0.0', () => {
     `Health check available at /health`
   );
 
-  const hasUser =
-    process.env.SMTP_USER &&
-    process.env.SMTP_USER !== 'your-email@gmail.com';
-
-  const hasPass =
-    process.env.SMTP_PASS &&
-    process.env.SMTP_PASS !== 'your-app-password';
-
-  if (!hasUser || !hasPass) {
-
-    console.log(
-      'SMTP credentials are not configured.'
-    );
-
-    console.log(
-      'Running in EMAIL SIMULATION MODE.'
-    );
-
+  if (process.env.RESEND_API_KEY) {
+    console.log('Resend API configured and active.');
   } else {
+    console.log('Resend API is not configured.');
+    const hasUser =
+      process.env.SMTP_USER &&
+      process.env.SMTP_USER !== 'your-email@gmail.com';
 
-    console.log(
-      `SMTP configured for: ${process.env.SMTP_USER}`
-    );
+    const hasPass =
+      process.env.SMTP_PASS &&
+      process.env.SMTP_PASS !== 'your-app-password';
 
+    if (!hasUser || !hasPass) {
+      console.log('SMTP credentials are not configured.');
+      console.log('Running in EMAIL SIMULATION MODE.');
+    } else {
+      console.log(`SMTP configured for: ${process.env.SMTP_USER}`);
+    }
   }
 });

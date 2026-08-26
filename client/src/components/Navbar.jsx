@@ -103,7 +103,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="md:hidden fixed top-20 left-4 right-4 z-40 glass rounded-2xl p-6"
+            className="md:hidden fixed top-20 left-4 right-4 z-40 bg-surface/95 border border-border backdrop-blur-xl rounded-2xl p-6 shadow-xl"
           >
             <ul className="flex flex-col gap-4 font-mono text-sm">
               {links.map((link) => (
@@ -111,7 +111,7 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); handleClick(link.href) }}
-                    className="block py-1"
+                    className="block py-1 text-text-dim hover:text-cyan-400 dark:hover:text-cyan-300 transition-colors"
                   >
                     {link.label}
                   </a>
