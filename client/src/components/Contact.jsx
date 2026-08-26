@@ -33,7 +33,7 @@ export default function Contact() {
       setStatus('submitting')
       setErrorMessage('')
       try {
-        const response = await fetch('http://localhost:5001/api/contact', {
+        const response = await fetch('https://portfolio-c5hh.onrender.com/api/contact', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
