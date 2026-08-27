@@ -45,7 +45,7 @@ export default function Navbar() {
           Santosh<span className="text-gradient">.dev</span>
         </a>
 
-        <ul className="hidden md:flex items-center gap-7 font-mono text-[13px] text-text-dim">
+        <ul className="hidden lg:flex items-center gap-7 font-mono text-[13px] text-text-dim">
           {links.map((link) => (
             <li key={link.href}>
               <a
@@ -60,7 +60,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={toggleTheme}
             aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
@@ -77,7 +77,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <button
             onClick={toggleTheme}
             aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
@@ -103,7 +103,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="md:hidden fixed top-20 left-4 right-4 z-40 bg-surface/95 border border-border backdrop-blur-xl rounded-2xl p-6 shadow-xl"
+            className="lg:hidden fixed top-20 left-4 right-4 z-40 bg-surface/95 border border-border backdrop-blur-xl rounded-2xl p-6 shadow-xl"
           >
             <ul className="flex flex-col gap-4 font-mono text-sm">
               {links.map((link) => (

@@ -192,7 +192,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex flex-col gap-4 w-full"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 w-full"
           >
             {[
               { icon: Mail, label: 'Email Me directly', desc: 'santoshvarma01814@gmail.com', href: 'mailto:santoshvarma01814@gmail.com' },
