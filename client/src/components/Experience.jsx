@@ -41,9 +41,10 @@ export default function Experience() {
           className="text-center mb-16"
         >
           {/* Year Count Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-300/80 dark:border-white/10 bg-white/90 dark:bg-slate-950/80 backdrop-blur-md text-[#0284c7] dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-4 shadow-sm">
-            <Calendar size={13} />
-            <span>TOTAL EXPERIENCE: {expStats.display} (NOV 2022 &mdash; PRESENT)</span>
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-slate-300/80 dark:border-white/10 bg-white/90 dark:bg-slate-950/80 backdrop-blur-md text-[#0284c7] dark:text-cyan-400 font-mono text-[10px] sm:text-xs uppercase tracking-wider mb-4 shadow-sm">
+            <Calendar size={13} className="shrink-0" />
+            <span className="hidden sm:inline">TOTAL EXPERIENCE: {expStats.display} (NOV 2022 &mdash; PRESENT)</span>
+            <span className="sm:hidden">EXPERIENCE: {expStats.display} (2022 &mdash; PRESENT)</span>
           </div>
 
           <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white">
@@ -55,10 +56,10 @@ export default function Experience() {
         </motion.div>
 
         {/* Timeline with Year Count on Each Position */}
-        <div className="relative pl-8 sm:pl-10">
-          <div className="absolute left-[7px] sm:left-[9px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-400/60 via-purple-400/40 to-cyan-300/60" />
+        <div className="relative pl-6 sm:pl-10">
+          <div className="absolute left-[5px] sm:left-[9px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-400/60 via-purple-400/40 to-cyan-300/60" />
 
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-8 sm:gap-12">
             {experienceWithTenure.map((item, i) => {
               const accent = accentAt(i)
               return (
@@ -71,7 +72,7 @@ export default function Experience() {
                   className="relative"
                 >
                   <span
-                    className={`absolute -left-8 sm:-left-10 top-1.5 h-3.5 w-3.5 rounded-full ${accent.dot}`}
+                    className={`absolute -left-6 sm:-left-10 top-1.5 h-3 sm:h-3.5 w-3 sm:w-3.5 rounded-full ${accent.dot}`}
                     style={{ boxShadow: `0 0 12px 2px ${accent.shadow}` }}
                   />
                   <div className={`glass rounded-2xl p-6 sm:p-7 ${accent.chipBorder} border border-slate-200/80 dark:border-white/10 shadow-sm`}>

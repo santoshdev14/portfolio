@@ -56,9 +56,9 @@ export default function Navbar() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 select-none">
-      {/* Floating Capsule Navbar (as shown in user screenshot) */}
-      <nav className="w-full max-w-6xl rounded-2xl px-6 py-3 flex items-center justify-between glass border border-slate-200/80 dark:border-white/10 shadow-2xl backdrop-blur-xl bg-white/85 dark:bg-slate-950/75 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 pt-3 sm:pt-4 select-none">
+      {/* Floating Capsule Navbar */}
+      <nav className="w-full max-w-6xl rounded-2xl px-4 py-2.5 sm:px-6 sm:py-3 flex items-center justify-between glass border border-slate-200/80 dark:border-white/10 shadow-2xl backdrop-blur-xl bg-white/85 dark:bg-slate-950/75 transition-all duration-300">
         {/* Brand: Santosh.dev */}
         <a
           href="#home"
@@ -138,7 +138,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden fixed top-20 left-4 right-4 z-50 bg-white/95 dark:bg-slate-950/95 border border-slate-200 dark:border-white/15 backdrop-blur-2xl rounded-2xl p-6 shadow-2xl text-slate-900 dark:text-white"
+            className="lg:hidden fixed top-16 sm:top-20 left-3 right-3 sm:left-4 sm:right-4 z-50 bg-white/95 dark:bg-slate-950/95 border border-slate-200 dark:border-white/15 backdrop-blur-2xl rounded-2xl p-5 sm:p-6 shadow-2xl text-slate-900 dark:text-white"
           >
             <ul className="flex flex-col gap-4 font-mono text-sm">
               {links.map((link) => (

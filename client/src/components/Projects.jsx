@@ -561,7 +561,7 @@ export default function Projects() {
               <button
                 onClick={() => setActive(null)}
                 aria-label="Close project details"
-                className="fixed md:absolute top-6 right-6 md:top-4 md:right-4 z-30 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-slate-200/60 dark:bg-slate-900/60 p-2 rounded-full border border-slate-300/30 dark:border-white/10 transition-all hover:scale-110 cursor-pointer"
+                className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-30 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-slate-200/80 dark:bg-slate-900/80 backdrop-blur-md p-2 rounded-full border border-slate-300/40 dark:border-white/15 transition-all hover:scale-110 cursor-pointer shadow-md"
               >
                 <X size={16} />
               </button>

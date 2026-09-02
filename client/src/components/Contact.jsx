@@ -124,14 +124,14 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             onSubmit={handleSubmit}
             noValidate
-            className="glass rounded-3xl p-6 sm:p-10 flex flex-col gap-6 shadow-xl"
+            className="glass rounded-2xl sm:rounded-3xl p-5 sm:p-10 flex flex-col gap-5 sm:gap-6 shadow-xl"
           >
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
               {field('name', 'Name')}
               {field('email', 'Email', 'email')}
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="projectType" className="block text-xs font-mono ml-1" style={{ color: 'var(--color-text-dim)' }}>
                   Project Type
@@ -159,7 +159,7 @@ export default function Contact() {
             {field('message', 'Message', 'textarea')}
 
             {status === 'error' && (
-              <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2">
+              <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3.5 sm:p-4 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2">
                 <span className="text-base">⚠️</span>
                 <span>{errorMessage}</span>
               </div>
@@ -168,7 +168,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className={`mt-4 flex items-center justify-center gap-2 rounded-xl px-8 py-4 font-semibold text-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/25 transition-all duration-300 group hover:scale-[1.02] active:scale-[0.98] hover:brightness-110 ${status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
+              className={`mt-2 sm:mt-4 flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 sm:px-8 sm:py-4 font-semibold text-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/25 transition-all duration-300 group hover:scale-[1.02] active:scale-[0.98] hover:brightness-110 ${status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
             >
               {status === 'submitting' ? (
                 <>

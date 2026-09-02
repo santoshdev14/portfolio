@@ -91,14 +91,15 @@ export default function TunnelHeroScene({ isLight }) {
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(BG)
 
-    const HX = 9.2
-    const HY = 6.6
+    const isMobilePortrait = W < 768 || W < Ht
+    const HX = isMobilePortrait ? 7.0 : 9.2
+    const HY = isMobilePortrait ? 9.6 : 6.6
     const CELLZ = 7.5
     const RINGS = 14
     const LEN = RINGS * CELLZ
     scene.fog = new THREE.Fog(BG, CELLZ * 2.2, LEN * 0.92)
 
-    const camera = new THREE.PerspectiveCamera(65, W / Ht, 0.1, LEN * 1.5)
+    const camera = new THREE.PerspectiveCamera(isMobilePortrait ? 72 : 65, W / Ht, 0.1, LEN * 1.5)
     camera.position.set(0, 0, 0)
     camera.lookAt(0, 0, -1)
 
@@ -171,8 +172,8 @@ export default function TunnelHeroScene({ isLight }) {
 
       for (let c = 0; c < 4; c++) {
         const wp = WALLS[(c + i) % 4]
-        const bh = rnd(2.7, 3.6)
-        const bw = bh * 1.2
+        const bh = isMobilePortrait ? rnd(1.9, 2.6) : rnd(2.7, 3.6)
+        const bw = bh * (isMobilePortrait ? 1.3 : 1.2)
         const along = wp.isX ? rnd(-HY + 1.2, HY - 1.2) : rnd(-HX + 1.2, HX - 1.2)
         const dz = -rnd(1.0, CELLZ - 1.0)
         const eps = 0.05
@@ -235,6 +236,7 @@ export default function TunnelHeroScene({ isLight }) {
       const h = container.clientHeight
       renderer.setSize(w, h, false)
       camera.aspect = w / h
+      camera.fov = (w < 768 || w < h) ? 72 : 65
       camera.updateProjectionMatrix()
     }
     window.addEventListener('resize', resize)
@@ -259,6 +261,7 @@ export default function TunnelHeroScene({ isLight }) {
       vel += e.deltaY * 0.0016
     }
     const onPointerDown = (e) => {
+      if (e.pointerType === 'touch') return // Let mobile gestures scroll the webpage naturally
       down = true
       lastY = e.clientY
       container.classList.add('is-dragging')
