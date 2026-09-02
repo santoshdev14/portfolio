@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ExternalLink, X } from 'lucide-react'
+import { ExternalLink, X, Heart } from 'lucide-react'
 import { GithubIcon } from './icons/BrandIcons'
 import { projects } from '../data/projects'
 import { accentAt } from '../data/palette'
@@ -389,6 +389,13 @@ function ProjectMockup({ id, interactive = false, activeState, setActiveState })
 
 function ProjectCard({ project, onOpen, index }) {
   const accent = accentAt(index)
+  const [wished, setWished] = useState(false)
+
+  const handleWish = (e) => {
+    e.stopPropagation()
+    setWished((prev) => !prev)
+  }
+
   return (
     <motion.div
       layout
@@ -399,12 +406,31 @@ function ProjectCard({ project, onOpen, index }) {
       className={project.size === 'lg' ? 'md:col-span-2' : ''}
     >
       <WobbleCard
-        className={`group glass rounded-2xl overflow-hidden cursor-pointer ${accent.chipBorder} h-full flex flex-col border border-white/10`}
+        className={`group glass rounded-2xl overflow-hidden cursor-pointer ${accent.chipBorder} h-full flex flex-col border border-white/10 relative`}
         onClick={() => onOpen(project)}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => e.key === 'Enter' && onOpen(project)}
       >
+        {/* Wishlist Heart Button (Reference Site Style) */}
+        <button
+          type="button"
+          onClick={handleWish}
+          aria-label="Save project"
+          className={`absolute top-3 right-3 z-30 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+            wished
+              ? 'bg-rose-500 text-white scale-110 shadow-lg'
+              : 'bg-black/50 text-slate-300 hover:text-white hover:bg-black/80'
+          }`}
+        >
+          <Heart size={14} className={wished ? 'fill-current animate-[wishPop_0.38s]' : ''} />
+        </button>
+
+        {/* Drop Badge */}
+        <div className="absolute top-3 left-3 z-30 px-2 py-0.5 rounded font-mono text-[9px] uppercase font-bold tracking-wider bg-black/70 border border-white/10 text-cyan-300">
+          DROP 0{index + 1}
+        </div>
+
         <div className="relative overflow-hidden bg-slate-950/80 h-44 sm:h-48 border-b border-white/5 shrink-0">
           <WindowFrame title={`${project.id}.jsx`}>
             <ProjectMockup id={project.id} />
@@ -463,7 +489,7 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className="relative py-28 px-6">
+    <section id="projects" className="relative py-16 md:py-28 px-4 md:px-6">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -527,7 +553,7 @@ export default function Projects() {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-4xl bg-surface gradient-border rounded-2xl overflow-hidden flex flex-col md:flex-row h-[90vh] md:h-auto max-h-[90vh]"
+              className="relative w-full max-w-4xl bg-surface gradient-border rounded-2xl flex flex-col md:flex-row h-auto max-h-[90vh] overflow-y-auto md:overflow-hidden"
               role="dialog"
               aria-modal="true"
               aria-label={active.title}
@@ -535,13 +561,13 @@ export default function Projects() {
               <button
                 onClick={() => setActive(null)}
                 aria-label="Close project details"
-                className="absolute top-4 right-4 z-20 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-slate-200/60 dark:bg-slate-900/60 p-2 rounded-full border border-slate-300/30 dark:border-white/10 transition-all hover:scale-110 cursor-pointer"
+                className="fixed md:absolute top-6 right-6 md:top-4 md:right-4 z-30 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-slate-200/60 dark:bg-slate-900/60 p-2 rounded-full border border-slate-300/30 dark:border-white/10 transition-all hover:scale-110 cursor-pointer"
               >
                 <X size={16} />
               </button>
 
               {/* Left Side: Info & Text */}
-              <div className="flex-1 p-6 md:p-8 flex flex-col justify-between overflow-y-auto max-h-[45vh] md:max-h-[80vh]">
+              <div className="flex-1 p-6 md:p-8 flex flex-col justify-between md:overflow-y-auto max-h-none md:max-h-[80vh]">
                 <div>
                   <span className={`text-[10px] font-mono uppercase tracking-wider mb-2 block ${activeAccent.text}`}>
                     Featured Project
@@ -587,7 +613,7 @@ export default function Projects() {
               </div>
 
               {/* Right Side: Interactive Mockup Stage */}
-              <div className="flex-1 bg-slate-950 p-6 md:p-8 flex flex-col justify-center items-center border-t md:border-t-0 md:border-l border-black/5 dark:border-white/5 overflow-y-auto max-h-[45vh] md:max-h-[80vh]">
+              <div className="flex-1 bg-slate-950 p-6 md:p-8 flex flex-col justify-center items-center border-t md:border-t-0 md:border-l border-black/5 dark:border-white/5 md:overflow-y-auto max-h-none md:max-h-[80vh]">
                 <div className="w-full max-w-md bg-slate-900/40 rounded-xl border border-white/10 overflow-hidden flex flex-col aspect-video md:aspect-[4/3] shadow-2xl animate-fade-in">
                   {/* Mock browser header */}
                   <div className="flex items-center justify-between px-3 py-2 bg-slate-900 border-b border-white/5 shrink-0">

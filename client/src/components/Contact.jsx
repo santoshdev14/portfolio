@@ -92,7 +92,7 @@ export default function Contact() {
 
   return (
     <>
-      <section id="contact" className="relative py-28 px-6 overflow-hidden">
+      <section id="contact" className="relative pt-16 pb-12 md:pt-24 md:pb-16 px-4 md:px-6 overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0 -z-10"
           style={{
@@ -168,7 +168,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className={`mt-4 flex items-center justify-center gap-2 rounded-xl px-8 py-4 font-semibold text-sm text-white bg-gradient-to-r from-blue-500 to-purple-500 glow-blue transition-all duration-300 group hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl hover:brightness-110 ${status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
+              className={`mt-4 flex items-center justify-center gap-2 rounded-xl px-8 py-4 font-semibold text-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/25 transition-all duration-300 group hover:scale-[1.02] active:scale-[0.98] hover:brightness-110 ${status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
             >
               {status === 'submitting' ? (
                 <>
@@ -195,27 +195,48 @@ export default function Contact() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 w-full"
           >
             {[
-              { icon: Mail, label: 'Email Me directly', desc: 'santoshvarma01814@gmail.com', href: 'mailto:santoshvarma01814@gmail.com' },
-              { icon: LinkedinIcon, label: 'Connect on LinkedIn', desc: "Let's expand our network", href: 'https://www.linkedin.com/in/santosh-varma-7a2425228?utm_source=share_via&utm_content=profile&utm_medium=member_ios' },
-              { icon: GithubIcon, label: 'Follow on GitHub', desc: 'Check out my repositories', href: 'https://github.com/santoshdev14' },
-              { icon: InstagramIcon, label: 'Follow on Instagram', desc: 'See my latest updates', href: 'https://www.instagram.com/santoshvarma.14' },
-            ].map(({ icon: Icon, label, desc, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                className="glass rounded-2xl p-5 flex items-start gap-4 hover:border-cyan-400/50 hover:bg-cyan-500/5 transition-all duration-300 w-full group shadow-sm hover:shadow-md"
-              >
-                <div className="p-2.5 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all">
-                  <Icon size={20} />
-                </div>
-                <div className="flex flex-col text-left">
-                  <span className="text-sm font-semibold mb-0.5" style={{ color: 'var(--color-text)' }}>{label}</span>
-                  <span className="text-xs" style={{ color: 'var(--color-text-dim)' }}>{desc}</span>
-                </div>
-              </a>
-            ))}
+              { icon: Mail, label: 'Email Me directly', desc: 'santoshvarma01814@gmail.com', href: 'mailto:santoshvarma01814@gmail.com', color: 'blue' },
+              { icon: LinkedinIcon, label: 'Connect on LinkedIn', desc: "Let's expand our network", href: 'https://www.linkedin.com/in/santosh-varma-7a2425228?utm_source=share_via&utm_content=profile&utm_medium=member_ios', color: 'sky' },
+              { icon: GithubIcon, label: 'Follow on GitHub', desc: 'Check out my repositories', href: 'https://github.com/santoshdev14', color: 'slate' },
+              { icon: InstagramIcon, label: 'Follow on Instagram', desc: 'See my latest updates', href: 'https://www.instagram.com/santoshvarma.14', color: 'pink' },
+            ].map(({ icon: Icon, label, desc, href, color }) => {
+              const colorMap = {
+                blue: {
+                  wrapper: 'hover:border-blue-400/50 hover:bg-blue-500/5',
+                  iconBg: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 group-hover:bg-blue-500/20 group-hover:shadow-blue-500/20'
+                },
+                sky: {
+                  wrapper: 'hover:border-sky-400/50 hover:bg-sky-500/5',
+                  iconBg: 'bg-sky-500/10 text-sky-600 dark:text-sky-400 group-hover:bg-sky-500/20 group-hover:shadow-sky-500/20'
+                },
+                slate: {
+                  wrapper: 'hover:border-slate-400/50 hover:bg-slate-500/5 dark:hover:bg-slate-400/10',
+                  iconBg: 'bg-slate-500/10 text-slate-700 dark:text-slate-300 group-hover:bg-slate-500/20 group-hover:shadow-slate-500/20'
+                },
+                pink: {
+                  wrapper: 'hover:border-pink-400/50 hover:bg-pink-500/5',
+                  iconBg: 'bg-pink-500/10 text-pink-600 dark:text-pink-400 group-hover:bg-pink-500/20 group-hover:shadow-pink-500/20'
+                }
+              };
+
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`glass rounded-2xl p-5 flex items-start gap-4 transition-all duration-300 w-full group shadow-sm hover:shadow-md hover:-translate-y-1 ${colorMap[color].wrapper}`}
+                >
+                  <div className={`p-2.5 rounded-xl group-hover:scale-110 transition-all duration-300 shadow-sm group-hover:shadow-md ${colorMap[color].iconBg}`}>
+                    <Icon size={20} />
+                  </div>
+                  <div className="flex flex-col text-left overflow-hidden min-w-0">
+                    <span className="text-sm font-semibold mb-0.5 truncate transition-colors duration-300" style={{ color: 'var(--color-text)' }}>{label}</span>
+                    <span className="text-xs truncate w-full" style={{ color: 'var(--color-text-dim)' }}>{desc}</span>
+                  </div>
+                </a>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -257,7 +278,7 @@ export default function Contact() {
               
               <button
                 onClick={() => setSubmitted(false)}
-                className="w-full rounded-xl py-4 font-semibold text-sm text-white bg-gradient-to-r from-blue-500 to-purple-500 transition-all hover:brightness-110 active:scale-[0.98] shadow-lg"
+                className="w-full rounded-xl py-4 font-semibold text-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 transition-all hover:brightness-110 active:scale-[0.98] shadow-lg shadow-cyan-500/20"
               >
                 Close
               </button>

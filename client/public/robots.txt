@@ -1,0 +1,6 @@
+# Robots.txt for Santosh Varma Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap index
+Sitemap: https://santoshvarma.vercel.app/sitemap.xml
